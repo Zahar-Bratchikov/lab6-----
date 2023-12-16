@@ -8,6 +8,8 @@ def start_client(host, port):
     try:
         # Подключение к серверу
         client_socket.connect((host, port))
+        client_socket.settimeout(2)  # Устанавливаем таймаут в секундах
+
         print(f"Подключено к серверу {host}:{port}")
 
         while True:
@@ -19,9 +21,17 @@ def start_client(host, port):
             # Отправка данных серверу
             client_socket.sendall(message.encode('utf-8'))
 
-            # Получение данных от сервера
-            data = client_socket.recv(1024)
-            print(f"Получено от сервера: {data.decode('utf-8')}")
+            try:
+                # Получение данных от сервера с использованием таймаута
+                data = client_socket.recv(1024)
+                if not data:
+                    print("Сервер закрыл соединение")
+                    break
+
+                print(f"Получено от сервера: {data.decode('utf-8')}")
+
+            except socket.timeout:
+                print("Таймаут при получении данных от сервера")
 
     except KeyboardInterrupt:
         print("\nКлиент остановлен.")
