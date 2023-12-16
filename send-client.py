@@ -20,7 +20,7 @@ def start_send_client(server_host, server_port):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Использование: python send_client.py <ip-адрес сервера> <порт сервера>")
+        print("Использование: python send-client.py <ip-адрес сервера> <порт сервера>")
         sys.exit(1)
 
     server_host = sys.argv[1]

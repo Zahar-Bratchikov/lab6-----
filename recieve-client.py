@@ -20,7 +20,7 @@ def start_receive_client(local_port):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Использование: python receive_client.py <порт>")
+        print("Использование: python receive-client.py <порт>")
         sys.exit(1)
 
     local_port = int(sys.argv[1])
